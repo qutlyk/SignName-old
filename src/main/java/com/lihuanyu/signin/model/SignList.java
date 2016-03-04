@@ -1,6 +1,7 @@
 package com.lihuanyu.signin.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 /**
  * Created by skyADMIN on 16/3/4.
@@ -15,6 +16,8 @@ public class SignList {
 
     private int yibanid;
     private String yibanname;
+    private Timestamp signed_time;
+    private String realname;
 
     public long getId() {
         return id;
@@ -38,5 +41,21 @@ public class SignList {
 
     public void setYibanname(String yibanname) {
         this.yibanname = yibanname;
+    }
+
+    public Timestamp getSigned_time() {
+        return signed_time;
+    }
+
+    public void setSigned_time(Timestamp signed_time) {
+        this.signed_time = signed_time;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 }

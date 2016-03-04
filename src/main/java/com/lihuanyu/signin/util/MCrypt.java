@@ -6,6 +6,7 @@ package com.lihuanyu.signin.util;
 
 
 import com.lihuanyu.signin.config.DevConfig;
+import com.lihuanyu.signin.config.ProductConfig;
 
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
@@ -17,12 +18,12 @@ public class MCrypt {
 
     static char[] HEX_CHARS = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
 
-    private String iv = DevConfig.client_id;//Dummy iv (CHANGE IT!)
+    private String iv = ProductConfig.client_id;//Dummy iv (CHANGE IT!)
     private IvParameterSpec ivspec;
     private SecretKeySpec keyspec;
     private Cipher cipher;
 
-    private String SecretKey = DevConfig.AppSecret;//Dummy secretKey (CHANGE IT!)
+    private String SecretKey = ProductConfig.AppSecret;//Dummy secretKey (CHANGE IT!)
 
     public MCrypt()
     {
