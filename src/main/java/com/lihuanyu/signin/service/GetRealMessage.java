@@ -7,6 +7,7 @@ import com.lihuanyu.signin.session.RealUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +23,9 @@ import java.util.Collection;
  */
 @Service
 public class GetRealMessage {
+
+    @Autowired
+    private HttpSession httpSession;
 
     @Autowired
     private SignListDao signListDao;
@@ -52,6 +56,7 @@ public class GetRealMessage {
     public String ProcessSign(String json, int yibanid, String yibanname){
         Gson gson = new Gson();
         RealUserInfo realUserInfo = gson.fromJson(json, RealUserInfo.class);
+        httpSession.setAttribute("yibanhead",realUserInfo.info.yb_userhead);
         Collection<SignList> signLists = signListDao.findByYibanid(yibanid);
         if (signLists.isEmpty()){
             SignList signList = new SignList();
