@@ -1,8 +1,10 @@
 package com.lihuanyu.signin.service;
 
 import com.google.gson.Gson;
+import com.lihuanyu.signin.model.SignList;
+import com.lihuanyu.signin.model.SignListDao;
 import com.lihuanyu.signin.session.RealUserInfo;
-import com.lihuanyu.signin.session.SessionUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -12,12 +14,18 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.sql.Timestamp;
+import java.util.Collection;
 
 /**
  * Created by skyADMIN on 16/3/4.
  */
 @Service
 public class GetRealMessage {
+
+    @Autowired
+    private SignListDao signListDao;
+
     public String getMessage(String access_token) throws IOException {
         String url = "https://openapi.yiban.cn/user/real_me";
         String charset = "UTF-8";  // Or in Java 7 and later, use the constant: java.nio.charset.StandardCharsets.UTF_8.name()
@@ -41,9 +49,20 @@ public class GetRealMessage {
         return sb.toString();
     }
 
-    public void ProcessSign(String json){
+    public String ProcessSign(String json, int yibanid, String yibanname){
         Gson gson = new Gson();
         RealUserInfo realUserInfo = gson.fromJson(json, RealUserInfo.class);
-        System.out.println(realUserInfo.info.yb_realname);
+        Collection<SignList> signLists = signListDao.findByYibanid(yibanid);
+        if (signLists.isEmpty()){
+            SignList signList = new SignList();
+            signList.setYibanid(yibanid);
+            signList.setRealname(realUserInfo.info.yb_realname);
+            signList.setYibanname(yibanname);
+            signList.setSigned_time(new Timestamp(System.currentTimeMillis()));
+            signListDao.save(signList);
+            return "success";
+        }else {
+            return "false";
+        }
     }
 }

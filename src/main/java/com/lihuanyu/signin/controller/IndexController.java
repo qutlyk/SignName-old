@@ -35,7 +35,12 @@ public class IndexController {
         Gson gson = new Gson();
         SessionUser sessionUser = gson.fromJson(output, SessionUser.class);
         String result = getRealMessage.getMessage(sessionUser.visit_oauth.access_token);
-
+        int yibanid = sessionUser.visit_user.userid;
+        String yibanname = sessionUser.visit_user.username;
+        String ans = getRealMessage.ProcessSign(result,yibanid,yibanname);
+        if (ans.equals("success")){
+            model.addAttribute("title","成功签到!");
+        }
         return result;
     }
 
