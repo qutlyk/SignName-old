@@ -3,7 +3,7 @@ package com.lihuanyu.signin.service;
 import com.google.gson.Gson;
 import com.lihuanyu.signin.model.SignList;
 import com.lihuanyu.signin.model.SignListDao;
-import com.lihuanyu.signin.session.RealUserInfo;
+import com.lihuanyu.signin.util.RealUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

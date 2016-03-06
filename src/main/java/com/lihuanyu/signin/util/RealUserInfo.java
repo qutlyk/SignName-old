@@ -1,4 +1,4 @@
-package com.lihuanyu.signin.session;
+package com.lihuanyu.signin.util;
 
 /**
  * Created by skyADMIN on 16/3/4.

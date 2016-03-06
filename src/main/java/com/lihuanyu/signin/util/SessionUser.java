@@ -1,4 +1,4 @@
-package com.lihuanyu.signin.session;
+package com.lihuanyu.signin.util;
 
 /**
  * Created by echao on 2016/2/24.

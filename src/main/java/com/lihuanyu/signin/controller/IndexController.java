@@ -1,19 +1,16 @@
 package com.lihuanyu.signin.controller;
 
 import com.google.gson.Gson;
-import com.lihuanyu.signin.config.DevConfig;
 import com.lihuanyu.signin.config.ProductConfig;
-import com.lihuanyu.signin.model.SignList;
 import com.lihuanyu.signin.model.SignListDao;
 import com.lihuanyu.signin.service.GetRealMessage;
-import com.lihuanyu.signin.session.SessionUser;
+import com.lihuanyu.signin.util.SessionUser;
 import com.lihuanyu.signin.util.MCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -44,6 +41,7 @@ public class IndexController {
         String yibanname = sessionUser.visit_user.username;
         String ans = getRealMessage.ProcessSign(result,yibanid,yibanname);
         String headurl = (String) httpSession.getAttribute("yibanhead");
+
         if (ans.equals("success")){
             model.addAttribute("result","成功签到");
             model.addAttribute("username",sessionUser.visit_user.username);
@@ -55,7 +53,7 @@ public class IndexController {
             model.addAttribute("photo",headurl);
             model.addAttribute("word","是否已经签过到了?");
         }
-        return result;
+        return "index";
     }
 
     @RequestMapping("/")

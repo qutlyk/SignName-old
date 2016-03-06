@@ -20,7 +20,7 @@ public class AdminController {
 
     @RequestMapping("/admin")
     public String showAdminLogin(){
-        return "adminlogin";
+        return "loginadmin";
     }
 
     @RequestMapping(value = "/adminlogin",method = RequestMethod.POST)
