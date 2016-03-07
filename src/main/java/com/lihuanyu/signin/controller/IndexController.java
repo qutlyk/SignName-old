@@ -35,18 +35,26 @@ public class IndexController {
         MCrypt mCrypt = new MCrypt();
         String output = new String(mCrypt.decrypt(verify_request));
         Gson gson = new Gson();
-        SessionUser sessionUser = gson.fromJson(output, SessionUser.class);
-        httpSession.setAttribute("username",sessionUser.visit_user.username);
+        try {
+            SessionUser sessionUser = gson.fromJson(output, SessionUser.class);
+            httpSession.setAttribute("username", sessionUser.visit_user.username);
+            String result = getRealMessage.getMessage(sessionUser.visit_oauth.access_token);
+            int yibanid = sessionUser.visit_user.userid;
+            String yibanname = sessionUser.visit_user.username;
+            String ans = getRealMessage.ProcessSign(result, yibanid, yibanname);
 
-        String result = getRealMessage.getMessage(sessionUser.visit_oauth.access_token);
-        int yibanid = sessionUser.visit_user.userid;
-        String yibanname = sessionUser.visit_user.username;
-        String ans = getRealMessage.ProcessSign(result,yibanid,yibanname);
-
-        if (ans.equals("success")){
-            return "redirect:/success";
-        }else {
-            return "redirect:/false";
+            if (ans.equals("success")) {
+                return "redirect:/success";
+            } else if (ans.equals("error")) {
+                model.addAttribute("result", "无法获取真实信息,是否未通过实名认证.");
+                return "redirect:/error";
+            } else {
+                return "redirect:/false";
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            model.addAttribute("result","授权失败,原因不明,请联系石大易班发展中心.");
+            return "redirect:/error";
         }
     }
 
