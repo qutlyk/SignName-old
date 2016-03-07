@@ -36,23 +36,39 @@ public class IndexController {
         String output = new String(mCrypt.decrypt(verify_request));
         Gson gson = new Gson();
         SessionUser sessionUser = gson.fromJson(output, SessionUser.class);
+        httpSession.setAttribute("username",sessionUser.visit_user.username);
+
         String result = getRealMessage.getMessage(sessionUser.visit_oauth.access_token);
         int yibanid = sessionUser.visit_user.userid;
         String yibanname = sessionUser.visit_user.username;
         String ans = getRealMessage.ProcessSign(result,yibanid,yibanname);
-        String headurl = (String) httpSession.getAttribute("yibanhead");
 
         if (ans.equals("success")){
-            model.addAttribute("result","成功签到");
-            model.addAttribute("username",sessionUser.visit_user.username);
-            model.addAttribute("photo",headurl);
-            model.addAttribute("word","感谢您按时参会");
+            return "redirect:/success";
         }else {
-            model.addAttribute("result","签到失败");
-            model.addAttribute("username",sessionUser.visit_user.username);
-            model.addAttribute("photo",headurl);
-            model.addAttribute("word","是否已经签过到了?");
+            return "redirect:/false";
         }
+    }
+
+    @RequestMapping("/success")
+    public String success(Model  model){
+        String headurl = (String) httpSession.getAttribute("yibanhead");
+        String username = (String) httpSession.getAttribute("username");
+        model.addAttribute("result","成功签到");
+        model.addAttribute("username",username);
+        model.addAttribute("photo",headurl);
+        model.addAttribute("word","感谢您按时参会");
+        return "index";
+    }
+
+    @RequestMapping("/false")
+    public String fail(Model model){
+        String headurl = (String) httpSession.getAttribute("yibanhead");
+        String username = (String) httpSession.getAttribute("username");
+        model.addAttribute("result","签到失败");
+        model.addAttribute("username",username);
+        model.addAttribute("photo",headurl);
+        model.addAttribute("word","是否已经签过到了?");
         return "index";
     }
 

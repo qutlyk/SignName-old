@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
-  <title>管理界面</title>
+  <title>石大易签到</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,11 +30,11 @@
 
 
 <div class="container">
+
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                aria-expanded="false" aria-controls="navbar">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -44,35 +44,17 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/">Home</a></li>
-          <li><a href="about">About</a></li>
+          <li class="active"><a href="#">About</a></li>
           <li><a href="contact">Contact</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
   </nav>
 
-  <div class="row marketing">
-    <h3>统计列表</h3>
-    <p>本次会议共 <span th:text="${number}">n</span> 人到场.</p>
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>序号</th>
-        <th>易班id</th>
-        <th>真实姓名</th>
-        <th>签到时间</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="signList:${signLists}">
-        <td th:text="${signListStat.count}">id</td>
-        <td th:text="${signList.yibanid}">yibanid</td>
-        <td th:text="${signList.realname}">realname</td>
-        <td th:text="${signList.signed_time}">2016年3月5日 上午01:02</td>
-      </tr>
-      </tbody>
-    </table>
+  <div class="jumbotron">
+    <h1>关于在线抽奖</h1>
+    <br/>
+    <p class="lead">本应用由石大易班发展中心技术部制作,全校通过易班实名认证的同学均可使用该应用创建自己社团/协会/学院活动的抽奖,创建提交后将由石大易班发展中心审核,通过后可以复制抽奖链接发送在易班/空间/微博/朋友圈,让相关用户参与抽奖.<br/><br/>石大易班发展中心不为抽奖活动提供任何担保,仅审核创建者是否是相关组织的负责人,有问题一律向相关组织反馈.程序bug向石大易班发展中心反馈,代码源码在github上有公布,保证抽奖的公平性.</p>
   </div>
 
   <div class="footer">

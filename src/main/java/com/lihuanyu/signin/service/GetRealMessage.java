@@ -54,20 +54,29 @@ public class GetRealMessage {
     }
 
     public String ProcessSign(String json, int yibanid, String yibanname){
-        Gson gson = new Gson();
-        RealUserInfo realUserInfo = gson.fromJson(json, RealUserInfo.class);
-        httpSession.setAttribute("yibanhead",realUserInfo.info.yb_userhead);
-        Collection<SignList> signLists = signListDao.findByYibanid(yibanid);
-        if (signLists.isEmpty()){
-            SignList signList = new SignList();
-            signList.setYibanid(yibanid);
-            signList.setRealname(realUserInfo.info.yb_realname);
-            signList.setYibanname(yibanname);
-            signList.setSigned_time(new Timestamp(System.currentTimeMillis()));
-            signListDao.save(signList);
-            return "success";
-        }else {
-            return "false";
+        try {
+            Gson gson = new Gson();
+            RealUserInfo realUserInfo = gson.fromJson(json, RealUserInfo.class);
+            httpSession.setAttribute("yibanhead", realUserInfo.info.yb_userhead);
+            Collection<SignList> signLists = signListDao.findByYibanid(yibanid);
+            if (signLists.isEmpty()) {
+                try {
+                    SignList signList = new SignList();
+                    signList.setYibanid(yibanid);
+                    signList.setRealname(realUserInfo.info.yb_realname);
+                    signList.setYibanname(yibanname);
+                    signList.setSigned_time(new Timestamp(System.currentTimeMillis()));
+                    signListDao.save(signList);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                return "success";
+            } else {
+                return "false";
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return "error";
         }
     }
 }
