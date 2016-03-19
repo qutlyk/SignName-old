@@ -73,10 +73,10 @@ public class IndexController {
     public String fail(Model model){
         String headurl = (String) httpSession.getAttribute("yibanhead");
         String username = (String) httpSession.getAttribute("username");
-        model.addAttribute("result","签到失败");
+        model.addAttribute("result","已经签到");
         model.addAttribute("username",username);
         model.addAttribute("photo",headurl);
-        model.addAttribute("word","是否已经签过到了?");
+        model.addAttribute("word","已经签过到了,请勿重复签到");
         return "index";
     }
 
