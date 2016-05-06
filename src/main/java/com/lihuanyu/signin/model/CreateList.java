@@ -4,25 +4,20 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by skyADMIN on 16/3/4.
+ * Created by skyADMIN on 16/5/6.
  */
 @Entity
-@Table(name = "sign_list")
-public class SignList {
+@Table(name = "createlist")
+public class CreateList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private int createid;
-
     private int yibanid;
+    private String activityname;
 
-    private String yibanname;
     private Timestamp signed_time;
-    private String realname;
-
-
 
     public long getId() {
         return id;
@@ -40,12 +35,12 @@ public class SignList {
         this.yibanid = yibanid;
     }
 
-    public String getYibanname() {
-        return yibanname;
+    public String getActivityname() {
+        return activityname;
     }
 
-    public void setYibanname(String yibanname) {
-        this.yibanname = yibanname;
+    public void setActivityname(String activityname) {
+        this.activityname = activityname;
     }
 
     public Timestamp getSigned_time() {
@@ -54,21 +49,5 @@ public class SignList {
 
     public void setSigned_time(Timestamp signed_time) {
         this.signed_time = signed_time;
-    }
-
-    public String getRealname() {
-        return realname;
-    }
-
-    public void setRealname(String realname) {
-        this.realname = realname;
-    }
-
-    public int getCreateid() {
-        return createid;
-    }
-
-    public void setCreateid(int createid) {
-        this.createid = createid;
     }
 }
