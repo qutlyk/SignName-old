@@ -14,12 +14,13 @@ public class SignList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(unique = true)
     private int yibanid;
 
     private String yibanname;
     private Timestamp signed_time;
     private String realname;
+
+
 
     public long getId() {
         return id;
