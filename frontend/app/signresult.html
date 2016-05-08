@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>石大易签到</title>
-  <meta name="description" content="">
+  <meta name="description" content="签到">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="shortcut icon" href="/favicon.ico">
@@ -28,13 +28,13 @@
 <p class="browsehappy">你正在使用一个<strong>过时的</strong>浏览器. 请到<a href="http://browsehappy.com/">这里</a>去升级你的浏览器以获得更佳的体验.</p>
 <![endif]-->
 
+
 <div class="container">
 
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                aria-expanded="false" aria-controls="navbar">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -51,24 +51,13 @@
     </div><!--/.container-fluid -->
   </nav>
 
-  <article class="jumbotron">
-    <header>
-      <h1>石大易签到</h1>
-      <p>石大易签到,轻松统计活动到场人数,省时省力,操作简单.点击下面的按钮尝试创建一个签到项目吧!</p>
-      <button class="btn btn-success">创建</button>
-    </header>
-    <section>
-      <table class="table">
-        <title>历史记录</title>
-        <thead>
-          <th>id</th>
-          <th>名称</th>
-          <th>时间</th>
-          <th>详情</th>
-        </thead>
-      </table>
-    </section>
-  </article>
+  <div class="jumbotron">
+    <h1 th:text="${result}">签到结果</h1>
+    <p class="lead"><span th:text="${username}">用户名</span>,<span th:text="${word}">您已成功签到</span></p>
+    <p><img th:src="@{${photo}}"></p>
+  </div>
+
+
 
   <div class="footer">
     <p><span class="glyphicon glyphicon-heart"></span> from the UPCyiban - skyADMIN</p>
