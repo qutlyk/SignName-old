@@ -23,8 +23,9 @@ public class LoginService {
         return httpSession.getAttribute("userid") != null;
     }
 
-    public ModelAndView toYibanAuth() {
-        return new ModelAndView("redirect:https://openapi.yiban.cn/oauth/authorize?client_id=" + ProductConfig.client_id + "&redirect_uri=" + ProductConfig.redirect_uri);
+    public String toYibanAuth() {
+        String auth = "redirect:https://openapi.yiban.cn/oauth/authorize?client_id=" + ProductConfig.client_id + "&redirect_uri=" + ProductConfig.redirect_uri;
+        return auth;
     }
 
     public String processAuth(String verify_request) throws Exception {
