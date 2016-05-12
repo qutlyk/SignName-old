@@ -9,4 +9,5 @@ import java.util.Collection;
  */
 public interface SignListDao extends CrudRepository<SignList,Long> {
     public Collection<SignList> findByYibanid(int yibanid);
+    public Collection<SignList> findByCreateid(int createid);
 }

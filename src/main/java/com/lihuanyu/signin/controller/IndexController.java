@@ -30,7 +30,9 @@ public class IndexController {
         if (!loginService.isLogin()){
             return loginService.toYibanAuth();
         }
-
+        if (httpSession.getAttribute("signid")!=null){
+            return "redirect:/sign?id="+(long)httpSession.getAttribute("signid");
+        }
         int yibanid = (int) httpSession.getAttribute("userid");
         model.addAttribute("lists",signService.getCreateList(yibanid));
         return "index";

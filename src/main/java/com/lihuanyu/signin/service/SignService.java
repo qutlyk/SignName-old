@@ -2,12 +2,15 @@ package com.lihuanyu.signin.service;
 
 import com.lihuanyu.signin.model.CreateList;
 import com.lihuanyu.signin.model.CreateListDao;
+import com.lihuanyu.signin.model.SignList;
+import com.lihuanyu.signin.model.SignListDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 /**
  * Created by skyADMIN on 16/5/7.
@@ -21,7 +24,14 @@ public class SignService {
     @Autowired
     private CreateListDao createListDao;
 
-    public Iterable<CreateList> getCreateList(int userid){
+    @Autowired
+    private SignListDao signListDao;
+
+    public Collection<SignList> getSignList(int createid) {
+        return signListDao.findByCreateid(createid);
+    }
+
+    public Iterable<CreateList> getCreateList(int userid) {
         return createListDao.findByYibanid(userid);
     }
 
