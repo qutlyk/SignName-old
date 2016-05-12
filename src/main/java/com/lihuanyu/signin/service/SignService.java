@@ -35,7 +35,7 @@ public class SignService {
         return createListDao.findByYibanid(userid);
     }
 
-    public String doCreate(String actName) {
+    public String doCreate(String actName, Model model) {
         CreateList createList = new CreateList();
         createList.setActivityname(actName);
         int yibanid = (int) httpSession.getAttribute("userid");
@@ -47,7 +47,10 @@ public class SignService {
             ex.printStackTrace();
             return "error";
         }
-        return "redirect:/";
+        String src = "http://localhost:8082/sign?id=" + createList.getId();
+        String picsrc = "http://qr.topscan.com/api.php?text=" + src;
+        model.addAttribute("picsrc", picsrc);
+        return "createresult";
     }
 
     public String signResult(Model model, String result, String word) {
