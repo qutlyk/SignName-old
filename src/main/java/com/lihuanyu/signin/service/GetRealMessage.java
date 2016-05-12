@@ -53,18 +53,19 @@ public class GetRealMessage {
         return sb.toString();
     }
 
-    public String ProcessSign(String json, int yibanid, String yibanname){
+    public String ProcessSign(String json, int yibanid, String yibanname, int signid){
         try {
             Gson gson = new Gson();
             RealUserInfo realUserInfo = gson.fromJson(json, RealUserInfo.class);
             httpSession.setAttribute("yibanhead", realUserInfo.info.yb_userhead);
-            Collection<SignList> signLists = signListDao.findByYibanid(yibanid);
+            Collection<SignList> signLists = signListDao.findByYibanidAndCreateid(yibanid, signid);
             if (signLists.isEmpty()) {
                 try {
                     SignList signList = new SignList();
                     signList.setYibanid(yibanid);
                     signList.setRealname(realUserInfo.info.yb_realname);
                     signList.setYibanname(yibanname);
+                    signList.setCreateid(signid);
                     signList.setSigned_time(new Timestamp(System.currentTimeMillis()));
                     signListDao.save(signList);
                 }catch (Exception ex){
