@@ -47,7 +47,7 @@ public class SignService {
             ex.printStackTrace();
             return "error";
         }
-        String src = "http://localhost:8082/sign?id=" + createList.getId();
+        String src = "http://yb.upc.edu.cn:8082/sign?id=" + createList.getId();
         String picsrc = "http://qr.topscan.com/api.php?text=" + src;
         model.addAttribute("picsrc", picsrc);
         return "createresult";

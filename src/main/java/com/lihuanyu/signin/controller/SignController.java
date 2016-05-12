@@ -66,7 +66,7 @@ public class SignController {
         Collection<SignList> signLists = signService.getSignList(id);
         model.addAttribute("signLists", signLists);
         model.addAttribute("number", signLists.size());
-        String src = "http://localhost:8082/sign?id=" + id;
+        String src = "http://yb.upc.edu.cn:8082/sign?id=" + id;
         String picsrc = "http://qr.topscan.com/api.php?text=" + src;
         model.addAttribute("picsrc", picsrc);
         return "admin";
