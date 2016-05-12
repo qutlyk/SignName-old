@@ -75,7 +75,7 @@
           <td th:text="${list.id}">id</td>
           <td th:text="${list.activityname}">id</td>
           <td th:text="${list.signed_time}">id</td>
-          <td><a th:href="">123</a></td>
+          <td><a th:href="@{/signdetail(id=${list.id})}">详情</a></td>
         </tr>
         </tbody>
       </table>
