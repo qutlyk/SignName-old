@@ -2,6 +2,8 @@ package com.lihuanyu.signin.controller;
 
 import com.lihuanyu.signin.model.CreateList;
 import com.lihuanyu.signin.model.CreateListDao;
+import com.lihuanyu.signin.model.SignList;
+import com.lihuanyu.signin.service.GetRealMessage;
 import com.lihuanyu.signin.service.LoginService;
 import com.lihuanyu.signin.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.Collection;
 
 /**
  * Created by skyADMIN on 16/3/19.
@@ -30,21 +34,41 @@ public class SignController {
     @Autowired
     private HttpSession httpSession;
 
+    @Autowired
+    private GetRealMessage getRealMessage;
+
     @RequestMapping("/confirmsign")
-    public String doSign() {
+    public String doSign() throws IOException {
         if (!loginService.isLogin()) {
             return loginService.toYibanAuth();
         }
-        if (httpSession.getAttribute("signid")==null){
+        if (httpSession.getAttribute("signid") == null) {
             return "error";
         }
-
-        return "";
+        long signid = (long) httpSession.getAttribute("signid");
+        httpSession.removeAttribute("signid");
+        int yibanid = (int) httpSession.getAttribute("userid");
+        String yibanname = (String) httpSession.getAttribute("username");
+        String msg = getRealMessage.getMessage((String) httpSession.getAttribute("access_token"));
+        return "redirect:/" + getRealMessage.ProcessSign(msg, yibanid, yibanname, (int) signid);
     }
 
     @RequestMapping("/signdetail")
     public String showSignDetail(int id, Model model) {
-        model.addAttribute("signLists", signService.getSignList(id));
+        if (!loginService.isLogin()) {
+            return loginService.toYibanAuth();
+        }
+        CreateList createList = createListDao.findOne((long) id);
+        int yibanid = (int) httpSession.getAttribute("userid");
+        if (createList.getYibanid() != yibanid) {
+            return "error";
+        }
+        Collection<SignList> signLists = signService.getSignList(id);
+        model.addAttribute("signLists", signLists);
+        model.addAttribute("number", signLists.size());
+        String src = "http://localhost:8082/sign?id=" + id;
+        String picsrc = "http://qr.topscan.com/api.php?text=" + src;
+        model.addAttribute("picsrc", picsrc);
         return "admin";
     }
 
@@ -57,14 +81,14 @@ public class SignController {
     }
 
     @RequestMapping(value = "/docreate", method = RequestMethod.POST)
-    public String doCreate(String actname) {
-        return signService.doCreate(actname);
+    public String doCreate(String actname, Model model) {
+        return signService.doCreate(actname, model);
     }
 
     @RequestMapping("/sign")
     public String showSign(long id, Model model) {
         if (!loginService.isLogin()) {
-            httpSession.setAttribute("signid",id);
+            httpSession.setAttribute("signid", id);
             return loginService.toYibanAuth();
         }
         CreateList createList = createListDao.findOne(id);

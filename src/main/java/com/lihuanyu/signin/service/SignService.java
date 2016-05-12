@@ -60,6 +60,6 @@ public class SignService {
         model.addAttribute("username", username);
         model.addAttribute("photo", headurl);
         model.addAttribute("word", word);
-        return "index";
+        return "signresult";
     }
 }
