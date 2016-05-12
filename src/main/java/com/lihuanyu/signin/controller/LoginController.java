@@ -17,7 +17,7 @@ public class LoginController {
     private LoginService loginService;
 
     @RequestMapping("/yibanauth")
-    public ModelAndView auth(){
+    public String auth(){
         return loginService.toYibanAuth();
     }
 
