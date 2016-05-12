@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
-  <title>管理员登陆</title>
-  <meta name="description" content="">
+  <title>石大易签到</title>
+  <meta name="description" content="签到">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="shortcut icon" href="/favicon.ico">
@@ -30,11 +30,11 @@
 
 
 <div class="container">
+
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                aria-expanded="false" aria-controls="navbar">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -52,25 +52,12 @@
   </nav>
 
   <div class="jumbotron">
-    <h2>管理员登陆</h2>
-    <p class="lead">注:注意账号密码安全!.</p>
-    <div style="text-align: center">
-      <form action="/adminlogin" method="post">
-        <div class="form-inline">
-          <label for="username">账号:</label>
-          <input type="text" name="username" id="username" class="form-control">
-        </div>
-        <br/>
-        <div class="form-inline">
-          <label for="password">密码:</label>
-          <input type="password" name="password" id="password" class="form-control">
-        </div>
-        <br/>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
+    <h1>签到页面</h1>
+    <p class="lead">签到项目:<span>测试项目</span></p>
+    <a href="/confirmsign" class="btn btn-success">确认签到</a>
   </div>
 
+  
   <div class="footer">
     <p><span class="glyphicon glyphicon-heart"></span> from the UPCyiban - skyADMIN</p>
   </div>
