@@ -54,6 +54,10 @@
   </nav>
 
   <div class="row marketing">
+    <h2>二维码</h2>
+    <p>复制此二维码,其他人使用易班客户端扫一扫即可签到.</p>
+    <img th:src="${picsrc}"/>
+    <a th:href="${picsrc}" download="qcode.jpg">点此下载</a>
     <h3>统计列表</h3>
     <p>本次会议共 <span th:text="${number}">n</span> 人到场.</p>
     <table class="table table-striped">
