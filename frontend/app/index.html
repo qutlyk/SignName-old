@@ -71,11 +71,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>id</td>
-          <td>id</td>
-          <td>id</td>
-          <td>id</td>
+        <tr th:each="list:${lists}">
+          <td th:text="${list.id}">id</td>
+          <td th:text="${list.activityname}">id</td>
+          <td th:text="${list.signed_time}">id</td>
+          <td><a th:href="">123</a></td>
         </tr>
         </tbody>
       </table>

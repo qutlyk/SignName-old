@@ -21,6 +21,10 @@ public class SignService {
     @Autowired
     private CreateListDao createListDao;
 
+    public Iterable<CreateList> getCreateList(int userid){
+        return createListDao.findByYibanid(userid);
+    }
+
     public String doCreate(String actName) {
         CreateList createList = new CreateList();
         createList.setActivityname(actName);
@@ -33,7 +37,7 @@ public class SignService {
             ex.printStackTrace();
             return "error";
         }
-        return "index";
+        return "redirect:/";
     }
 
     public String signResult(Model model, String result, String word) {

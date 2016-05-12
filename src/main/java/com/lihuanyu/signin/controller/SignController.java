@@ -23,7 +23,7 @@ public class SignController {
     @RequestMapping("/create")
     public String showCreatePage() {
         if (!loginService.isLogin()){
-            loginService.toYibanAuth();
+            return loginService.toYibanAuth();
         }
         return "create";
     }

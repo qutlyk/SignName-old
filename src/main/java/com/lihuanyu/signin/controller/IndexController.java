@@ -1,6 +1,7 @@
 package com.lihuanyu.signin.controller;
 
 import com.lihuanyu.signin.service.LoginService;
+import com.lihuanyu.signin.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +22,17 @@ public class IndexController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private SignService signService;
+
     @RequestMapping("/")
-    public ModelAndView showindex(){
+    public String showindex(Model model){
         if (!loginService.isLogin()){
             return loginService.toYibanAuth();
         }
-        return new ModelAndView("index");
+
+        int yibanid = (int) httpSession.getAttribute("userid");
+        model.addAttribute("lists",signService.getCreateList(yibanid));
+        return "index";
     }
 }
